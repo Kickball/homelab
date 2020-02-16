@@ -1,0 +1,4 @@
+FROM python:3
+ADD humblebundle-sync.py /
+RUN pipp install humblebundle-downloader
+CMD [ "python", "./humblebundle-sync.py" ]
