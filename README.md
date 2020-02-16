@@ -1,10 +1,10 @@
 ## Homlab Roadmap  
   - Management
-    - [] Nomad 
-    - [] Vault
-    - [] Consul
+    - [ ] Nomad 
+    - [ ] Vault
+    - [ ] Consul
   - Systems
-    - [] Humblebundle Sync 
-    - [] Dockerhub
-    - [] ArchiveTeam Warrior
-    - [] Moomin Comics Emailer (https://mymbleslatest.tumblr.com/)
+    - [ ] Humblebundle Sync 
+    - [ ] Dockerhub
+    - [ ] ArchiveTeam Warrior
+    - [ ] Moomin Comics Emailer (https://mymbleslatest.tumblr.com/)
