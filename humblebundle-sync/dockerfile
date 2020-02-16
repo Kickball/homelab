@@ -1,7 +1,8 @@
 FROM python:3
-ADD humblebundle-sync.py /
+COPY humblebundle-sync.py .
+COPY hbd-cookie.txt .
 ENV HBD_LIBRARY_PATH /data/humblebundle/
 ENV HBD_COOKIE hbd-cookie.txt
-COPY hbd-cookie.txt
 RUN pip install humblebundle-downloader
 CMD [ "python", "./humblebundle-sync.py" ]
+RUN chown -R edward:docker /data/humblebundle
