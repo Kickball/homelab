@@ -2,5 +2,6 @@ FROM python:3
 ADD humblebundle-sync.py /
 ENV HBD_LIBRARY_PATH /data/humblebundle/
 ENV HBD_COOKIE hbd-cookie.txt
+COPY hbd-cookie.txt
 RUN pip install humblebundle-downloader
 CMD [ "python", "./humblebundle-sync.py" ]
