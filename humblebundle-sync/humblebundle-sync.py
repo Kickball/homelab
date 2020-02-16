@@ -1,6 +1,6 @@
 #https://stackoverflow.com/a/11447648/3085144
 import os
-#https://github.com/xtream1101/humblebundle-downloader/issues
+#https://github.com/xtream1101/humblebundle-downloader/
 import humblebundle-downloader as hbd
 
 #https://stackoverflow.com/a/14981125/3085144
