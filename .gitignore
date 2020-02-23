@@ -1,2 +1,5 @@
+#Don't inlcude the cookie for hbd-sync
 hbd-cookie.txt
+#Don't include nomad binary but do include nomad folder
 nomad
+!nomad/
