@@ -5,6 +5,7 @@
     - [ ] Consul
   - Systems
     - [x] Dockerhub
+      - [ ] SSL (https://docs.docker.com/registry/configuration/#letsencrypt)
     - [x] Humblebundle Sync 
     - [ ] ArchiveTeam Warrior
     - [ ] Moomin Comics Emailer (https://mymbleslatest.tumblr.com/)
