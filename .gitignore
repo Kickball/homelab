@@ -1,5 +1,6 @@
 #Don't inlcude the cookie for hbd-sync
 hbd-cookie.txt
 #Don't include nomad binary but do include nomad folder
+#https://stackoverflow.com/a/16770464/3085144
 nomad
 !nomad/
