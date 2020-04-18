@@ -221,7 +221,6 @@ job "humblebundle-sync" {
 
         network {
           mbits = 25
-          port  "db"  {}
         }
       }
       # The "service" stanza instructs Nomad to register this task as a service
@@ -234,18 +233,18 @@ job "humblebundle-sync" {
       #
       #     https://www.nomadproject.io/docs/job-specification/service.html
       #
-      service {
-        name = "redis-cache"
-        tags = ["global", "cache"]
-        port = "db"
+      # service {
+      #   name = "redis-cache"
+      #   tags = ["global", "cache"]
+      #   port = "db"
 
-        check {
-          name     = "alive"
-          type     = "tcp"
-          interval = "10s"
-          timeout  = "2s"
-        }
-      }
+      #   check {
+      #     name     = "alive"
+      #     type     = "tcp"
+      #     interval = "10s"
+      #     timeout  = "2s"
+      #   }
+      # }
 
       # The "template" stanza instructs Nomad to manage a template, such as
       # a configuration file or script. This template can optionally pull data
