@@ -2,7 +2,8 @@
   - Management
     - [x] Nomad 
     - [ ] Vault
-    - [ ] Consul
+    - [x] Consul
+      - [ ] Listen on HTTPs
   - Systems
     - [x] Dockerhub
       - [ ] SSL (https://docs.docker.com/registry/configuration/#letsencrypt)
