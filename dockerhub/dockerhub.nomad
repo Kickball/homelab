@@ -104,8 +104,10 @@ job "dockerhub" {
 
 
       resources {
-        cpu    = 250 # 250 MHz
-        memory = 32 # 64MB
+        #MHz
+        cpu    = 250
+        #MB
+        memory = 32
 
         network {
           mbits = 50
@@ -127,15 +129,18 @@ job "dockerhub" {
       #
       service {
         name = "dockerhub"
-        tags = ["global", "dockerhub"]
+        tags = ["catalog", "dockerhub"]
         port = "https"
 
-        #check {
-        #  name     = "alive"
-        #  type     = "tcp"
-        #  interval = "60s"
-        #  timeout  = "5s"
-        #}
+        check {
+          name            = "catalog"
+          type            = "http"
+          protocol        = "http"
+          #tls_skip_verify = true
+          path            = "/v2/_catalog"
+          interval        = "60s"
+          timeout         = "5s"
+        }
       }
 
       # Controls the timeout between signalling a task it will be killed

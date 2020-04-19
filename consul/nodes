@@ -1,0 +1,1 @@
+[{"ID":"a62b4625-2cb4-d9aa-bbfc-e9983fa7d4e3","Node":"raspberrypi","Address":"192.168.1.178","Datacenter":"dc1","TaggedAddresses":{"lan":"192.168.1.178","lan_ipv4":"192.168.1.178","wan":"192.168.1.178","wan_ipv4":"192.168.1.178"},"Meta":{"consul-network-segment":""},"CreateIndex":5,"ModifyIndex":6}]
