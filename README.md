@@ -1,12 +1,15 @@
 ## Homlab Roadmap  
   - Management
-    - [x] Nomad 
+    - [x] Nomad
     - [ ] Vault
     - [x] Consul
       - [ ] Listen on HTTPs
+    - [ ]  Move to [Distroless Container](https://github.com/GoogleContainerTools/distroless) Bases ([e.g.](https://github.com/GoogleContainerTools/distroless/blob/master/examples/python3/Dockerfile))
   - Systems
     - [x] Dockerhub
       - [ ] SSL (https://docs.docker.com/registry/configuration/#letsencrypt)
     - [x] Humblebundle Sync 
     - [ ] ArchiveTeam Warrior
     - [ ] Moomin Comics Emailer (https://mymbleslatest.tumblr.com/)
+    - [ ] [Shynet](https://github.com/milesmcc/shynet) (https://www.reddit.com/r/coolgithubprojects/comments/g61p43/shynet_selfhosted_web_analytics_that_works/)
+    - [ ] Smokeping
