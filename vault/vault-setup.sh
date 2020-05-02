@@ -5,3 +5,4 @@ if [ ! -L '/usr/bin/vault' ]; then
   sudo ln -s $PWD/vault /usr/bin/
 fi
 vault -autocomplete-install
+exec $SHELL
