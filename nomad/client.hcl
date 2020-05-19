@@ -4,8 +4,8 @@ log_level = "DEBUG"
 # Setup data dir
 data_dir = "/tmp/nomad/client"
 
-# Give the agent a unique name. Defaults to hostname
-name = "client1"
+# Don't specify a unique name. Defaults to hostname
+# name = "server"
 
 # Enable the client
 client {

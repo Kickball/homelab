@@ -1,6 +1,8 @@
-wget https://releases.hashicorp.com/nomad/0.11.1/nomad_0.11.1_linux_arm.zip
-unzip -uo nomad_0.11.1_linux_arm.zip
-rm nomad_0.11.1_linux_arm.zip
+VERSION=0.11.2
+
+wget https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_arm.zip
+unzip -uo nomad_{VERSION}_linux_arm.zip
+rm nomad_{VERSION}_linux_arm.zip
 if [ ! -L '/usr/bin/nomad' ]; then
   sudo ln -s $PWD/nomad /usr/bin/
 fi
