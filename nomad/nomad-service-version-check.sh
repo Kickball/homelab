@@ -1,0 +1,1 @@
+OLD_VERSION=$(wget -qO - https://raw.githubusercontent.com/hashicorp/nomad/master/dist/systemd/nomad.service | sha256sum  | awk '{ print $1 }')
