@@ -1,9 +1,16 @@
+#!/bin/bash
+
+if [[ $EUID > 0 ]]; then
+  echo "Please run as root"
+  exit 1
+fi
+
 VERSION=0.11.2
 
 #Detect host type (e.g. sm [server master] = nomad server, ss [server slave] = nomad server & nomad client, sw [server worker] = nomad client)
 HOST_TYPE=$(echo $HOSTNAME | grep -oP "[A-Za-z]{2}(?=[0-9])+")
 
-function download_and_install {
+download_and_install_nomad () {
   # Download and "install" the requested version.
   /usr/bin/wget https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_arm.zip
   /usr/bin/unzip -uo nomad_{VERSION}_linux_arm.zip
@@ -11,7 +18,22 @@ function download_and_install {
 
   # Create symlink to a directory on the PATH if doesn't exist.
   if [ ! -L '/usr/bin/nomad' ]; then
-    sudo ln -s $PWD/nomad /usr/bin/
+    ln -s $PWD/nomad /usr/bin/
+  fi
+}
+
+add_nomad_config_file () {
+  if [ ! -d /etc/nomad-$1.d ]; then
+    mkdir /etc/nomad-$1.d
+  fi
+  if [ ! -f /etc/nomad-$1.d/nomad-$1.hcl ]; then
+    cp nomad-$1.hcl /etc/nomad-$1.d/nomad-$1.hcl
+  fi
+}
+
+add_nomad_systemd_entry () {
+  if [ ! -f /etc/systemd/system/nomad-$1.service ]; then
+    cp nomad-$1.service /etc/systemd/system/nomad-$1.service
   fi
 }
 
@@ -20,21 +42,48 @@ if [ "${HOST_TYPE}" = "sm" ]; then
   echo "sm detected"
   # Stop nomad services, if they exists.
   if [ systemctl status 2>/dev/null | grep -Fq 'nomad-server' ]; then
-    sudo systemctl stop nomad-server
+    systemctl stop nomad-server
   fi
+  #Setup Nomad server
+  add_nomad_config_file server
+  add_nomad_systemd_entry server
+
+  # Enable and Start Nomad Services
+  systemctl enable nomad-server
+  systemctl start nomad-server
 elif [ "${HOST_TYPE}" = "ss" ]; then
   echo "ss detected"
   # Stop nomad services, if they exists.
-  if [ systemctl status 2>/dev/null | grep -Fq 'nomad-server ]'; then
-    sudo systemctl stop nomad-server
+  if [ systemctl status 2>/dev/null | grep -Fq 'nomad-server' ]; then
+    systemctl stop nomad-server
   fi
   if [ systemctl status 2>/dev/null | grep -Fq 'nomad-client' ]; then
-    sudo systemctl stop nomad-server
+    systemctl stop nomad-client
   fi
+  # Setup Nomad client
+  add_nomad_config_file client
+  add_nomad_systemd_entry client
+
+  #Setup Nomad server
+  add_nomad_config_file server
+  add_nomad_systemd_entry server
+
+  # Enable and Start Nomad Services
+  systemctl enable nomad-client
+  systemctl start nomad-client
+  systemctl enable nomad-server
+  systemctl start nomad-server
 elif [ "${HOST_TYPE}" = "sw" ]; then
   echo "sw detected"
   # Stop nomad services, if they exists.
   if [ systemctl status 2>/dev/null | grep -Fq 'nomad-client' ]; then
-    sudo systemctl stop nomad-server
+    systemctl stop nomad-client
   fi
+  # Setup Nomad client
+  add_nomad_config_file client
+  add_nomad_systemd_entry client
+
+  # Enable and Start Nomad Services
+  systemctl enable nomad-client
+  systemctl start nomad-client
 fi
