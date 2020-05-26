@@ -13,8 +13,8 @@ HOST_TYPE=$(echo $HOSTNAME | grep -oP "[A-Za-z]{2}(?=[0-9])+")
 download_and_install_nomad () {
   # Download and "install" the requested version.
   /usr/bin/wget https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_arm.zip
-  /usr/bin/unzip -uo nomad_{VERSION}_linux_arm.zip
-  /bin/rm nomad_{VERSION}_linux_arm.zip
+  /usr/bin/unzip -uo nomad_${VERSION}_linux_arm.zip
+  /bin/rm nomad_${VERSION}_linux_arm.zip
 
   # Create symlink to a directory on the PATH if doesn't exist.
   if [ ! -L '/usr/bin/nomad' ]; then
@@ -41,9 +41,12 @@ add_nomad_systemd_entry () {
 if [ "${HOST_TYPE}" = "sm" ]; then
   echo "sm detected"
   # Stop nomad services, if they exists.
-  if [ systemctl status 2>/dev/null | grep -Fq 'nomad-server' ]; then
+  if [ -f /etc/systemd/system/nomad-server.service ]; then
     systemctl stop nomad-server
   fi
+  #Download and 'install' the nomad binary
+  download_and_install_nomad
+
   #Setup Nomad server
   add_nomad_config_file server
   add_nomad_systemd_entry server
@@ -54,12 +57,15 @@ if [ "${HOST_TYPE}" = "sm" ]; then
 elif [ "${HOST_TYPE}" = "ss" ]; then
   echo "ss detected"
   # Stop nomad services, if they exists.
-  if [ systemctl status 2>/dev/null | grep -Fq 'nomad-server' ]; then
+  if [ -f /etc/systemd/system/nomad-server.service ]; then
     systemctl stop nomad-server
   fi
-  if [ systemctl status 2>/dev/null | grep -Fq 'nomad-client' ]; then
+  if [ -f /etc/systemd/system/nomad-client.service ]; then
     systemctl stop nomad-client
   fi
+  #Download and 'install' the nomad binary
+  download_and_install_nomad
+  
   # Setup Nomad client
   add_nomad_config_file client
   add_nomad_systemd_entry client
@@ -76,9 +82,12 @@ elif [ "${HOST_TYPE}" = "ss" ]; then
 elif [ "${HOST_TYPE}" = "sw" ]; then
   echo "sw detected"
   # Stop nomad services, if they exists.
-  if [ systemctl status 2>/dev/null | grep -Fq 'nomad-client' ]; then
+  if [ -f /etc/systemd/system/nomad-client.service ]; then
     systemctl stop nomad-client
   fi
+  #Download and 'install' the nomad binary
+  download_and_install_nomad
+
   # Setup Nomad client
   add_nomad_config_file client
   add_nomad_systemd_entry client
