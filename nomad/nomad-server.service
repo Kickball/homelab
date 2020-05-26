@@ -1,3 +1,4 @@
+# Nomad server systemd service unit file
 [Unit]
 Description=Nomad Server
 Documentation=https://nomadproject.io/docs/
