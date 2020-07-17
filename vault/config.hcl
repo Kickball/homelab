@@ -4,7 +4,8 @@ storage "consul" {
 }
 
 listener "tcp" {
- address     = "192.168.1.178:8200"
+  #"192.168.1.178:8200"
+ address     = "{{ GetPrivateIP }}" 
  tls_disable = 1
 }
 

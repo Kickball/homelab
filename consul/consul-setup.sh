@@ -5,7 +5,7 @@ if [[ $EUID > 0 ]]; then
   exit 1
 fi
 
-VERSION="1.7.3"
+VERSION="1.8.0"
 
 #Detect host type (e.g. sm [server master] & ss [server slave] = consul server & consul client, sw [server worker] = consul client)
 HOST_TYPE=$(echo $HOSTNAME | grep -oP "[A-Za-z]{2}(?=[0-9])+")
@@ -28,12 +28,18 @@ add_consul_config_file () {
   fi
   if [ ! -f /etc/consul-$1.d/consul-$1.hcl ]; then
     cp consul-$1.hcl /etc/consul-$1.d/consul-$1.hcl
+  else
+    # Todo - Add SHA256SUM check
+    cp --force consul-$1.hcl /etc/consul-$1.d/consul-$1.hcl
   fi
 }
 
 add_consul_systemd_entry () {
   if [ ! -f /etc/systemd/system/consul-$1.service ]; then
     cp consul-$1.service /etc/systemd/system/consul-$1.service
+  else
+    # Todo - Add SHA256SUM check
+    cp --force consul-$1.service /etc/systemd/system/consul-$1.service
   fi
 }
 

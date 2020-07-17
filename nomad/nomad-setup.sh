@@ -5,7 +5,7 @@ if [[ $EUID > 0 ]]; then
   exit 1
 fi
 
-VERSION="0.11.2"
+VERSION="0.12.0"
 
 #Detect host type (e.g. sm [server master] = nomad server, ss [server slave] = nomad server & nomad client, sw [server worker] = nomad client)
 HOST_TYPE=$(echo $HOSTNAME | grep -oP "[A-Za-z]{2}(?=[0-9])+")
@@ -28,12 +28,18 @@ add_nomad_config_file () {
   fi
   if [ ! -f /etc/nomad-$1.d/nomad-$1.hcl ]; then
     cp nomad-$1.hcl /etc/nomad-$1.d/nomad-$1.hcl
+  else
+    # Todo - Add SHA256SUM check
+    cp --force nomad-$1.hcl /etc/nomad-$1.d/nomad-$1.hcl
   fi
 }
 
 add_nomad_systemd_entry () {
   if [ ! -f /etc/systemd/system/nomad-$1.service ]; then
     cp nomad-$1.service /etc/systemd/system/nomad-$1.service
+  else
+    # Todo - Add SHA256SUM check
+    cp -force nomad-$1.service /etc/systemd/system/nomad-$1.service
   fi
 }
 

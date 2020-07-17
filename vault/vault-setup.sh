@@ -1,4 +1,4 @@
-VERSION=1.4.2
+VERSION=1.4.3
 
 wget https://releases.hashicorp.com/vault/${VERSION}/vault_${VERSION}_linux_arm.zip
 unzip -uo vault_${VERSION}_linux_arm.zip

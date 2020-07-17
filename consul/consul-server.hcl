@@ -7,24 +7,25 @@ data_dir = "/tmp/consul/server"
 #Set the datacenter that it is part of
 datacenter = "dc1"
 
-#Set the IP address
-bind_addr = "192.168.1.178"
+# Defaults to binding on 0.0.0.0 (all addresses)
+bind_addr = "{{ GetPrivateIP }}"
 
 #Set the HTTP/DNS server IP address
-client_addr = "192.168.1.178"
+client_addr = "{{ GetPrivateIP }}"
 
 #Enable the web ui
 ui = true
 
-#Enable bootstrapping
-bootstrap = true
-
 # Enable the server
 server = true
 
-# Self-elect, should be 3 or 5 for production
-bootstrap_expect = 1
+#Enable bootstrapping
+#bootstrap = true
 
+# Self-elect, should be 3 or 5 for production
+bootstrap_expect = 3
+
+#To be setup
 connect {
   enabled = true
 }
