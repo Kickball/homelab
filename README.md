@@ -5,6 +5,8 @@
     - [ ] Vault
     - [x] Consul
       - [ ] Listen on HTTPs
+    - [ ] Puppet Master
+    - [ ] Puppet Agents
     - [ ]  Move to [Distroless Container](https://github.com/GoogleContainerTools/distroless) Bases ([e.g.](https://github.com/GoogleContainerTools/distroless/blob/master/examples/python3/Dockerfile))
   - Systems
     - [x] Dockerhub

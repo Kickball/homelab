@@ -4,6 +4,9 @@ log_level = "DEBUG"
 # Setup data dir
 data_dir = "/tmp/nomad/client"
 
+#Set the datacenter that it is part of
+datacenter = "locc"
+
 # Don't specify a unique name. Defaults to hostname
 # name = "server"
 

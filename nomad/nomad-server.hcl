@@ -4,6 +4,9 @@ log_level = "DEBUG"
 # Setup data dir
 data_dir = "/tmp/nomad/server"
 
+#Set the datacenter that it is part of
+datacenter = "locc"
+
 # Don't specify a unique name. Defaults to hostname
 # name = "server"
 
@@ -11,7 +14,7 @@ data_dir = "/tmp/nomad/server"
 server {
   enabled = true
 
-  # Self-elect, should be 3 or 5 for production
+  # Expect 3 nomad servers
   bootstrap_expect = 3
 }
 

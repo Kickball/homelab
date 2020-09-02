@@ -18,7 +18,7 @@ job "dockerhub" {
   #
   # The "datacenters" parameter specifies the list of datacenters which should
   # be considered when placing this task. This must be provided.
-  datacenters = ["dc1"]
+  datacenters = ["locc"]
 
   # The "type" parameter controls the type of job, which impacts the scheduler's
   # decision on placement. This configuration is optional and defaults to

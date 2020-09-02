@@ -4,8 +4,10 @@ log_level = "DEBUG"
 # Setup data dir
 data_dir = "/tmp/consul/server"
 
+log_file = "/var/log/"
+
 #Set the datacenter that it is part of
-datacenter = "dc1"
+datacenter = "locc"
 
 # Defaults to binding on 0.0.0.0 (all addresses)
 bind_addr = "{{ GetPrivateIP }}"
@@ -22,7 +24,7 @@ server = true
 #Enable bootstrapping
 #bootstrap = true
 
-# Self-elect, should be 3 or 5 for production
+# Expect 3 consul servers
 bootstrap_expect = 3
 
 #To be setup

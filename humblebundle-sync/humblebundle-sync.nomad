@@ -1,6 +1,6 @@
 job "humblebundle-sync" {
 
-  datacenters = ["dc1"]
+  datacenters = ["locc"]
 
   type = "batch"
 
