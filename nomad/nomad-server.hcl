@@ -2,7 +2,7 @@
 log_level = "DEBUG"
 
 # Setup data dir
-data_dir = "/tmp/nomad/server"
+data_dir = "/data/nomad/server"
 
 #Set the datacenter that it is part of
 datacenter = "locc"
@@ -14,12 +14,15 @@ datacenter = "locc"
 server {
   enabled = true
 
-  # Expect 3 nomad servers
-  bootstrap_expect = 3
+  # Expect 1 nomad server
+  bootstrap_expect = 1
 }
 
-consul {
-  address = "192.168.1.178:8500"
-  #ssl = true
-  #verify_ssl = false
-}
+# Specify a shared plugin directory
+plugin_dir = "/data/nomad/plugins"
+
+#consul {
+#  address = "192.168.1.178:8500"
+#  ssl = true
+#  verify_ssl = false
+#}

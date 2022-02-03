@@ -8,3 +8,4 @@ vault
 !vault/
 consul
 !consul/
+nomad-driver-podman

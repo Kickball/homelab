@@ -6,6 +6,7 @@ if [[ $EUID > 0 ]]; then
 fi
 
 VERSION="1.2.5"
+PODMAN_VERSION="0.3.0"
 
 check_binaries_installed() {
   # Potential edge case exists where package is installed but not on the path of the root. This check would error out, but the script would actually work as we reference the full path to the binary.
@@ -30,6 +31,22 @@ download_and_install_nomad () {
   if [ ! -L '/usr/bin/nomad' ]; then
     ln -s $PWD/nomad /usr/bin/
   fi
+}
+
+download_and_install_nomad_podman_plugin () {
+  # Download and "install" the requested version.
+  /usr/bin/wget https://releases.hashicorp.com/nomad-driver-podman/${PODMAN_VERSION}/nomad-driver-podman_${PODMAN_VERSION}_linux_arm64.zip
+  /usr/bin/unzip -uo nomad-driver-podman_${PODMAN_VERSION}_linux_arm64.zip
+  /bin/rm nomad-driver-podman_${PODMAN_VERSION}_linux_arm64.zip
+
+  # Check that the data directory exists, as the plugin needs to be moved to a subdirectory.
+  if [ ! -d '/data' ]; then
+    echo "Error: /data directory does not exist"
+    exit 1
+  fi
+
+  mkdir -p /data/nomad/plugins
+  ln -s $PWD/nomad-driver-podman /data/nomad/plugins/
 }
 
 add_nomad_config_file () {
@@ -85,9 +102,12 @@ elif [ "${HOST_TYPE}" = "ss" ]; then
   if [ -f /etc/systemd/system/nomad-client.service ]; then
     systemctl stop nomad-client
   fi
-  #Download and 'install' the nomad binary
+  # Download and 'install' the nomad binary
   download_and_install_nomad
   
+  # Download and 'install' nomad podman plugin
+  download_and_install_nomad_podman_plugin
+
   # Setup Nomad client
   add_nomad_config_file client
   add_nomad_systemd_entry client
@@ -107,8 +127,11 @@ elif [ "${HOST_TYPE}" = "sw" ]; then
   if [ -f /etc/systemd/system/nomad-client.service ]; then
     systemctl stop nomad-client
   fi
-  #Download and 'install' the nomad binary
+  # Download and 'install' the nomad binary
   download_and_install_nomad
+
+  # Download and 'install' nomad podman plugin
+  download_and_install_nomad_podman_plugin
 
   # Setup Nomad client
   add_nomad_config_file client
