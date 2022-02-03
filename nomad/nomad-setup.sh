@@ -12,7 +12,7 @@ HOST_TYPE=$(echo $HOSTNAME | grep -oP "[A-Za-z]{2}(?=[0-9])+")
 
 download_and_install_nomad () {
   # Download and "install" the requested version.
-  /usr/bin/wget https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_arm.zip
+  /usr/bin/wget https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_arm64.zip
   /usr/bin/unzip -uo nomad_${VERSION}_linux_arm.zip
   /bin/rm nomad_${VERSION}_linux_arm.zip
 
