@@ -5,7 +5,7 @@ if [[ $EUID > 0 ]]; then
   exit 1
 fi
 
-VERSION="0.12.0"
+VERSION="1.2.5"
 
 #Detect host type (e.g. sm [server master] = nomad server, ss [server slave] = nomad server & nomad client, sw [server worker] = nomad client)
 HOST_TYPE=$(echo $HOSTNAME | grep -oP "[A-Za-z]{2}(?=[0-9])+")
