@@ -7,8 +7,18 @@ fi
 
 VERSION="1.2.5"
 
-#Detect host type (e.g. sm [server master] = nomad server, ss [server slave] = nomad server & nomad client, sw [server worker] = nomad client)
-HOST_TYPE=$(/bin/cat /etc/hostname | grep -oP "[A-Za-z]{2}(?=[0-9])+")
+check_binaries_installed() {
+  # Potential edge case exists where package is installed but not on the path of the root. This check would error out, but the script would actually work as we reference the full path to the binary.
+  binaries=("cat" "wget" "ln" "cp" "unzip")
+  for i in "${binaries[@]}"
+  do
+    /bin/which "$i" &> /dev/null
+    if [ $? -ne 0 ]; then
+      echo "Unable to locate binary: $i"
+      exit 1
+    fi
+  done
+}
 
 download_and_install_nomad () {
   # Download and "install" the requested version.
@@ -39,9 +49,15 @@ add_nomad_systemd_entry () {
     cp nomad-$1.service /etc/systemd/system/nomad-$1.service
   else
     # Todo - Add SHA256SUM check
-    cp -force nomad-$1.service /etc/systemd/system/nomad-$1.service
+    cp --force nomad-$1.service /etc/systemd/system/nomad-$1.service
   fi
 }
+
+# Check that hte script's dependancies have been installed
+check_binaries_installed
+
+# Detect host type (e.g. sm [server master] = nomad server, ss [server slave] = nomad server & nomad client, sw [server worker] = nomad client)
+HOST_TYPE=$(/bin/cat /etc/hostname | grep -oP "[A-Za-z]{2}(?=[0-9])+")
 
 # Check if nomad is already setup as a service
 if [ "${HOST_TYPE}" = "sm" ]; then
@@ -50,7 +66,7 @@ if [ "${HOST_TYPE}" = "sm" ]; then
   if [ -f /etc/systemd/system/nomad-server.service ]; then
     systemctl stop nomad-server
   fi
-  #Download and 'install' the nomad binary
+  # Download and 'install' the nomad binary
   download_and_install_nomad
 
   #Setup Nomad server

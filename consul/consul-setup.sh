@@ -5,16 +5,26 @@ if [[ $EUID > 0 ]]; then
   exit 1
 fi
 
-VERSION="1.8.0"
+VERSION="1.11.2"
 
-#Detect host type (e.g. sm [server master] & ss [server slave] = consul server & consul client, sw [server worker] = consul client)
-HOST_TYPE=$(echo $HOSTNAME | grep -oP "[A-Za-z]{2}(?=[0-9])+")
+check_binaries_installed() {
+  # Potential edge case exists where package is installed but not on the path of the root. This check would error out, but the script would actually work as we reference the full path to the binary.
+  binaries=("cat" "wget" "ln" "cp" "unzip")
+  for i in "${binaries[@]}"
+  do
+    /bin/which "$i" &> /dev/null
+    if [ $? -ne 0 ]; then
+      echo "Unable to locate binary: $i"
+      exit 1
+    fi
+  done
+}
 
 download_and_install_consul () {
   # Download and "install" the requested version.
-  wget https://releases.hashicorp.com/consul/${VERSION}/consul_${VERSION}_linux_armhfv6.zip
-  unzip -uo consul_${VERSION}_linux_armhfv6.zip
-  rm consul_${VERSION}_linux_armhfv6.zip
+  wget https://releases.hashicorp.com/consul/${VERSION}/consul_${VERSION}_linux_arm64.zip
+  unzip -uo consul_${VERSION}_linux_arm64.zip
+  rm consul_${VERSION}_linux_arm64.zip
   if [ ! -L '/usr/bin/consul' ]; then
    sudo ln -s $PWD/consul /usr/bin/
   fi
@@ -42,6 +52,12 @@ add_consul_systemd_entry () {
     cp --force consul-$1.service /etc/systemd/system/consul-$1.service
   fi
 }
+
+# Check that hte script's dependancies have been installed
+check_binaries_installed
+
+#Detect host type (e.g. sm [server master] & ss [server slave] = consul server & consul client, sw [server worker] = consul client)
+HOST_TYPE=$(/bin/cat /etc/hostname | grep -oP "[A-Za-z]{2}(?=[0-9])+")
 
 # Check if consul is already setup as a service
 if [ "${HOST_TYPE}" = "sm" ] || [ "${HOST_TYPE}" = "ss" ]; then
