@@ -8,13 +8,13 @@ fi
 VERSION="1.2.5"
 
 #Detect host type (e.g. sm [server master] = nomad server, ss [server slave] = nomad server & nomad client, sw [server worker] = nomad client)
-HOST_TYPE=$(echo $HOSTNAME | grep -oP "[A-Za-z]{2}(?=[0-9])+")
+HOST_TYPE=$(/bin/cat /etc/hostname | grep -oP "[A-Za-z]{2}(?=[0-9])+")
 
 download_and_install_nomad () {
   # Download and "install" the requested version.
   /usr/bin/wget https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_arm64.zip
-  /usr/bin/unzip -uo nomad_${VERSION}_linux_arm.zip
-  /bin/rm nomad_${VERSION}_linux_arm.zip
+  /usr/bin/unzip -uo nomad_${VERSION}_linux_arm64.zip
+  /bin/rm nomad_${VERSION}_linux_arm64.zip
 
   # Create symlink to a directory on the PATH if doesn't exist.
   if [ ! -L '/usr/bin/nomad' ]; then
