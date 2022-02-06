@@ -1,7 +1,7 @@
 ## Homelab Roadmap  
   - Management
     - [x] Nomad
-      - [] SSL (https://learn.hashicorp.com/nomad/transport-security/enable-tls)
+      - [ ] SSL (https://learn.hashicorp.com/nomad/transport-security/enable-tls)
     - [ ] Vault
     - [x] Consul
       - [ ] Listen on HTTPs
