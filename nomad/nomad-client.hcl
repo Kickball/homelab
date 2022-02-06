@@ -28,6 +28,18 @@ ports {
 # Specify a shared plugin directory
 plugin_dir = "/data/nomad/plugins"
 
+plugin "raw_exec" {
+  config {
+    enabled = false
+  }
+}
+
+plugin "podman" {
+  config {
+    enabled = true
+  }
+}
+
 #consul {
 #  address = "192.168.1.178:8500"
 #  ssl = true

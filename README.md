@@ -1,21 +1,25 @@
-## Homlab Roadmap  
+## Homelab Roadmap  
   - Management
     - [x] Nomad
       - [] SSL (https://learn.hashicorp.com/nomad/transport-security/enable-tls)
     - [ ] Vault
     - [x] Consul
       - [ ] Listen on HTTPs
+    - [x] Root Certificate
+    - [x] DNS over TLS
+    - [x] DHCP
+    - [ ] Running OS remotely with PXE booting
     - [ ] Puppet Master
     - [ ] Puppet Agents
-    - [ ]  Move to [Distroless Container](https://github.com/GoogleContainerTools/distroless) Bases ([e.g.](https://github.com/GoogleContainerTools/distroless/blob/master/examples/python3/Dockerfile))
-  - Systems
+  - Services
     - [x] Dockerhub
       - [ ] SSL (https://docs.docker.com/registry/configuration/#letsencrypt)
     - [x] Humblebundle Sync 
     - [ ] ArchiveTeam Warrior
     - [ ] [OONI Probe CLI](https://github.com/ooni/probe-cli)
-    - [ ] Moomin Comics Emailer (https://mymbleslatest.tumblr.com/)
     - [ ] [Shynet](https://github.com/milesmcc/shynet) (https://www.reddit.com/r/coolgithubprojects/comments/g61p43/shynet_selfhosted_web_analytics_that_works/)
     - [ ] [Smokeping](https://oss.oetiker.ch/smokeping/)
     - [ ] [Paperless](https://github.com/the-paperless-project/paperless) or [Mayan EDMS](https://gitlab.com/mayan-edms/mayan-edms)
     - [ ] [Calibre](https://github.com/kovidgoyal/calibre) and [Calibre-Web](https://github.com/janeczku/calibre-web)
+  - Hardening
+    - Move to [Distroless Container](https://github.com/GoogleContainerTools/distroless) Bases ([e.g.](https://github.com/GoogleContainerTools/distroless/blob/master/examples/python3/Dockerfile))
