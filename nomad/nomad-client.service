@@ -24,6 +24,7 @@ StartLimitBurst=3
 StartLimitIntervalSec=10
 TasksMax=infinity
 OOMScoreAdjust=-1000
+User=edward
 
 [Install]
 WantedBy=multi-user.target

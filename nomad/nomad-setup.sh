@@ -5,7 +5,7 @@ if [[ $EUID > 0 ]]; then
   exit 1
 fi
 
-VERSION="1.2.5"
+VERSION="1.2.6"
 PODMAN_VERSION="0.3.0"
 
 check_binaries_installed() {
@@ -46,7 +46,9 @@ download_and_install_nomad_podman_plugin () {
   fi
 
   mkdir -p /data/nomad/plugins
-  ln -s $PWD/nomad-driver-podman /data/nomad/plugins/
+  if [ ! -L '/data/nomad/plugins/nomad-driver-podman' ]; then
+    ln -s $PWD/nomad-driver-podman /data/nomad/plugins/
+  fi
 }
 
 add_nomad_config_file () {
