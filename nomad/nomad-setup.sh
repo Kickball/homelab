@@ -51,6 +51,7 @@ download_and_install_nomad_podman_plugin () {
   fi
 }
 
+# TODO - Also copy over any files prefixed with the type (e.g. client/server), to allow config to be installed per service like volumes
 add_nomad_config_file () {
   if [ ! -d /etc/nomad-$1.d ]; then
     mkdir /etc/nomad-$1.d

@@ -1,0 +1,10 @@
+*** Alerts ***
+to = test@test.com
+from = test@test.com
+
++someloss
+type = loss
+# in percent
+pattern = >0%,*12*,>0%,*12*,>0%
+comment = loss 3 times  in a row
+
