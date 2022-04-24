@@ -11,6 +11,7 @@
     - [ ] Running OS remotely with PXE booting
     - [ ] Puppet Master
     - [ ] Puppet Agents
+    - [ ] Setup pipeline for Shell Scripts with https://www.shellcheck.net/#
   - Services
     - [x] Dockerhub
       - [ ] SSL (https://docs.docker.com/registry/configuration/#letsencrypt)
