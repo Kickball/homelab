@@ -1,5 +1,6 @@
-#Don't inlcude the cookie for hbd-sync
+#Don't inlcude cookies for sync jobs
 hbd-cookie.txt
+cookies-patreon-com.txt
 #Don't include hashicorp binaries but do include folders
 #https://stackoverflow.com/a/16770464/3085144
 nomad
