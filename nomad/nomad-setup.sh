@@ -5,8 +5,8 @@ if [[ $EUID > 0 ]]; then
   exit 1
 fi
 
-VERSION="1.2.6"
-PODMAN_VERSION="0.3.0"
+VERSION="1.3.3"
+PODMAN_VERSION="0.4.0"
 
 check_binaries_installed() {
   # Potential edge case exists where package is installed but not on the path of the root. This check would error out, but the script would actually work as we reference the full path to the binary.
