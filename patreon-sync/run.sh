@@ -1,0 +1,1 @@
+podman run --rm -v /data/patreon:/data/patreon patreon-sync
