@@ -92,7 +92,8 @@ job "dockerhub" {
     }
 
     task "dockerhub" {
-      driver = "docker"
+      driver = "podman"
+      #driver = "docker"
 
       config {
         image = "registry:latest"
@@ -105,7 +106,7 @@ job "dockerhub" {
 
       resources {
         #MHz
-        cpu    = 250
+        cpu    = 50
         #MB
         memory = 32
 
