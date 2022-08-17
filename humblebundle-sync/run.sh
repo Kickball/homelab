@@ -1,1 +1,1 @@
-docker run -v /data/humblebundle:/data/humblebundle humblebundle-sync
+podman run --rm -v /data/humblebundle:/data/humblebundle humblebundle-sync

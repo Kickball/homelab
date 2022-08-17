@@ -24,7 +24,7 @@ job "humblebundle-sync" {
     }
 
     task "humblebundle-sync" {
-      driver = "docker"
+      driver = "podman"
 
       config {
         image = "192.168.1.178:5000/humblebundle-sync:latest"
