@@ -53,7 +53,7 @@ add_consul_systemd_entry () {
   fi
 }
 
-# Check that hte script's dependancies have been installed
+# Check that the script's dependancies have been installed
 check_binaries_installed
 
 #Detect host type (e.g. sm [server master] & ss [server slave] = consul server & consul client, sw [server worker] = consul client)

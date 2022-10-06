@@ -5,7 +5,7 @@ if [[ $EUID > 0 ]]; then
   exit 1
 fi
 
-VERSION="1.3.3"
+VERSION="1.4.0"
 PODMAN_VERSION="0.4.0"
 
 check_binaries_installed() {
@@ -73,7 +73,7 @@ add_nomad_systemd_entry () {
   fi
 }
 
-# Check that hte script's dependancies have been installed
+# Check that the script's dependancies have been installed
 check_binaries_installed
 
 # Detect host type (e.g. sm [server master] = nomad server, ss [server slave] = nomad server & nomad client, sw [server worker] = nomad client)
